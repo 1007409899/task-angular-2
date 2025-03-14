@@ -11,6 +11,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SnackBarService } from '@app/core/services/snackbar-service.service';
 
 @Component({
   selector: 'app-task-list',
@@ -30,6 +31,7 @@ export class TaskListComponent  implements OnInit,AfterViewInit{
   }
   taskService = inject(TaskService)
   dialog = inject(MatDialog)
+  snackbar = inject(SnackBarService);
   displayedColumns: string[] = ['id', 'title', 'description', 'isCompleted', 'acciones'];
 
   ngOnInit() {
@@ -68,5 +70,21 @@ export class TaskListComponent  implements OnInit,AfterViewInit{
         });
       }
     });
+  }
+  updateStatus(task: Task): void {
+    // Aquí actualizas el estado de la tarea
+    task.isCompleted = !task.isCompleted;
+    this.taskService.updateTaskStatus(task.id, task.isCompleted).subscribe((data) => {
+      if (data) {
+        const index = this.dataSource.filteredData.findIndex((t) => t.id === task.id);
+        if (index !== -1) {
+          this.dataSource.filteredData[index] = task;
+          this.dataSource._updateChangeSubscription();
+          this.snackbar.notification$.next(data.message);
+        }
+      }
+    });
+
+
   }
 }

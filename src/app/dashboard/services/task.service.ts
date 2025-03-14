@@ -25,16 +25,16 @@ export class TaskService {
   deleteTask(id: number): Observable<responseTask<Task>> {
     return this.http.delete<responseTask<Task>>(`${this.apiUrl}/${id}`);
   }
+  updateTaskStatus(id: number, isCompleted: boolean): Observable<any> {
+    const url = `${this.apiUrl}/${id}/complete`;
 
-  /* deleteTodo(id: string): Observable<ResponseTask> {
-    return this.http.delete<ResponseTask>(`${this.apiUrl}/${id}`);
+    // JSON.stringify lo convierte en un JSON válido
+    return this.http.patch(url, JSON.stringify(isCompleted), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
-  updateTodo(id: number, todo: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, todo);
-  }
 
-  createTodo(todo: ResponseTask): Observable<any> {
-    return this.http.post<any>(this.apiUrl, todo);
-  } */
 }
