@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: left;
+  padding: 8px;
+}
+
+td.mat-cell.text-center,
+th.mat-header-cell.text-center {
+  text-align: center;
+}
+
+button[mat-icon-button] {
+  margin-right: 4px;
+}

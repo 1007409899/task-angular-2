@@ -1,0 +1,51 @@
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    .app-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 16px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+
+      &.active-link {
+        border-bottom: 2px solid #fff;
+      }
+    }
+  }
+
+  .profile-btn {
+    color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}

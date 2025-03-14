@@ -1,0 +1,29 @@
+<h3 mat-dialog-title>Agregar</h3>
+
+<div class="container" mat-dialog-content>
+  <form [formGroup]="taskForm">
+    <div class=" row m-2">
+
+      <mat-form-field class="col-md-6 col-sm-12" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field class="col-md-6 col-sm-12" ld appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Description" formControlName="description" />
+      </mat-form-field>
+
+
+
+      <mat-checkbox class="col-md-6 col-sm-12"  formControlName="isCompleted">Completada ?</mat-checkbox>
+  </div>
+  </form>
+
+</div>
+<mat-dialog-actions class="d-flex justify-content-end m-2 " >
+  <button mat-raised-button mat-dialog-close type="button" color="default">Cancelar</button>
+  <button [disabled]="this.taskForm.invalid" mat-raised-button type="button" color="primary" (click)="this.save()">Guardar</button>
+</mat-dialog-actions>
+
+

@@ -1,0 +1,26 @@
+<mat-dialog-content>
+  <p>{{ message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onConfirmClick()"
+    tabindex="1"
+    matTooltip="{{ confirmButtonText }}"
+    matTooltipPosition="above"
+  >
+    <mat-icon>{{ confirmButtonIcon }}</mat-icon>
+    {{ confirmButtonText }}
+  </button>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    tabindex="-1"
+    matTooltip="{{ cancelButtonText }}"
+    matTooltipPosition="above"
+  >
+    <mat-icon>{{ cancelButtonIcon }}</mat-icon>
+    {{ cancelButtonText }}
+  </button>
+</mat-dialog-actions>
