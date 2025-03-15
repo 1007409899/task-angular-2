@@ -10,11 +10,12 @@ import { TaskService } from '@app/dashboard/services/task.service';
 import { SnackBarService } from '@app/core/services/snackbar-service.service';
 import { responseTask } from '@app/core/interfaces/responde-task';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatErrorsGenericComponent } from '@app/core/components/mat-errors-generic/mat-errors-generic.component';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule],
+  imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule, MatErrorsGenericComponent],
   templateUrl: './task-form.component.html',
 })
 export class TaskFormComponent implements OnInit {
@@ -33,8 +34,8 @@ export class TaskFormComponent implements OnInit {
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       id: [1],
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(50)]],
+      description: ['', Validators.required, Validators.maxLength(200)],
       State: [this.statesTask.PENDIENTE],
     });
     this.fillForm();

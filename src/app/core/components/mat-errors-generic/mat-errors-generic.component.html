@@ -1,0 +1,6 @@
+<ng-container *ngIf="isFieldValid">
+  <mat-error class="custom-error-style">{{ fieldError }}</mat-error>
+</ng-container>
+<div class="matError" *ngIf="!isFieldValid">
+  <mat-hint *ngIf="matHint">{{ lengthField || 0 }}/{{ matHint }}</mat-hint>
+</div>

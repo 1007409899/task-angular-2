@@ -7,11 +7,21 @@
       <mat-form-field class="col-md-6 col-sm-12" appearance="outline">
         <mat-label>Titulo</mat-label>
         <input matInput placeholder="Title" formControlName="title" />
+        <app-mat-errors-generic
+          [formControlValid]="this.taskForm"
+          [field]="'title'"
+          [ValorTouched]="this.taskForm.get('title')!.touched"
+        />
       </mat-form-field>
 
-      <mat-form-field class="col-md-6 col-sm-12" ld appearance="outline">
+      <mat-form-field class="col-md-6 col-sm-12"  appearance="outline">
         <mat-label>Descripción</mat-label>
         <input matInput placeholder="Descripción" formControlName="description" />
+        <app-mat-errors-generic
+          [formControlValid]="this.taskForm"
+          [field]="'description'"
+          [ValorTouched]="this.taskForm.get('description')!.touched"
+        />
       </mat-form-field>
       <mat-checkbox  [checked]="taskForm.get('State')!.value === statesTask.COMPLETADO" class="col-md-6 col-sm-12"   (change)="onStateChange($event.checked)">Completada ?</mat-checkbox>
   </div>

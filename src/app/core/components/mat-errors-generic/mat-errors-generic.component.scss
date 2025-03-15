@@ -1,0 +1,18 @@
+.matError{
+  display: flex;
+  position: absolute;
+  bottom: -1.5rem; /* Ajusta el valor según sea necesario para el espacio deseado entre el input y el componente de errores */
+  font-size: 12px; /* Ajusta el tamaño de la letra según sea necesario */
+
+}
+.text-small{
+  font-size: 11px; /* Ajusta el tamaño de la letra según sea necesario */
+
+}
+.custom-error-style {
+  position: absolute !important;
+  font-size: .8rem !important;
+  margin-top: .8rem !important;
+  /* Otros estilos si es necesario */
+}
+
