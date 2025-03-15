@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {  MatIconModule } from '@angular/material/icon';
 import {  MatTooltipModule } from '@angular/material/tooltip';
@@ -8,7 +9,8 @@ import {  MatTooltipModule } from '@angular/material/tooltip';
   imports:[
     MatDialogModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
   ],
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',

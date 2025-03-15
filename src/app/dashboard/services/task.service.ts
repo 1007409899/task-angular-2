@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { responseTask } from '@app/core/interfaces/responde-task';
-import { Task } from '../interfaces/task';
+import { EstadoTask, Task } from '../interfaces/task';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +25,15 @@ export class TaskService {
   deleteTask(id: number): Observable<responseTask<Task>> {
     return this.http.delete<responseTask<Task>>(`${this.apiUrl}/${id}`);
   }
-  updateTaskStatus(id: number, isCompleted: boolean): Observable<any> {
+  updateTaskStatus(id: number, state: EstadoTask): Observable<any> {
     const url = `${this.apiUrl}/${id}/complete`;
+    const body = { state };
+    return this.http.patch(url, body);
+  }
+  filterByState(state: EstadoTask): Observable<Task[]> {
+    const params = new HttpParams().set('State', state);
 
-    // JSON.stringify lo convierte en un JSON válido
-    return this.http.patch(url, JSON.stringify(isCompleted), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    return this.http.get<any[]>(`${this.apiUrl}/by-status`, { params });
   }
 
 

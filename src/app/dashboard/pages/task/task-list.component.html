@@ -1,17 +1,31 @@
 <div class="p-5  table-response" style="max-height: 50vh;">
   <mat-card>
 
-<mat-card-header>
+<mat-card-header class="container-fluid py-3 ">
+  <div class="row d-flex justify-content-end ">
+    <div class="col-md-6 mb-2 mb-md-0">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="add()"
+      >
+        <mat-icon>add</mat-icon> Nueva tarea
+      </button>
+    </div>
 
+    <div class="col-md-6 ">
+      <mat-form-field appearance="outline" class=" h-5 mb-0">
+        <mat-select
+          [value]="'TODOS'"
+          (selectionChange)="onEstadoChange($event.value)"
+        >
+          <mat-option [value]="'TODOS'">Todos</mat-option>
+          <mat-option [value]="statesTask.PENDIENTE">Pendientes</mat-option>
+          <mat-option [value]="statesTask.COMPLETADO">Completadas</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <div>
-    <button
-    mat-raised-button
-    color="primary"
-    (click)="add()"
-    >
-     <mat-icon >add</mat-icon>
-    </button>
+  </div>
   </div>
 </mat-card-header>
 <mat-card-content>
@@ -34,7 +48,8 @@
   <ng-container matColumnDef="isCompleted">
     <th mat-header-cell *matHeaderCellDef> Estado </th>
     <td mat-cell *matCellDef="let element">
-      <mat-checkbox [checked]="element.isCompleted" (change)="updateStatus(element)"></mat-checkbox>
+      <mat-checkbox  [checked]="element.state === statesTask.COMPLETADO"
+      (change)="updateStatus($event.checked, element)"></mat-checkbox>
     </td>
   </ng-container>
   <!-- Columna Acciones -->

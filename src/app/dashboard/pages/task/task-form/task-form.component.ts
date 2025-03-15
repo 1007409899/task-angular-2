@@ -2,7 +2,7 @@ import { Component, Inject, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Task } from '@app/dashboard/interfaces/task';
+import { EstadoTask, Task } from '@app/dashboard/interfaces/task';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,39 +14,51 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [MatDialogModule, ReactiveFormsModule,   MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule],
+  imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule],
   templateUrl: './task-form.component.html',
 })
-export class TaskFormComponent implements OnInit{
+export class TaskFormComponent implements OnInit {
   taskForm!: FormGroup;
   fb = inject(FormBuilder);
   taskService = inject(TaskService);
   snackbar = inject(SnackBarService);
   isEdit = signal(false);
+  statesTask = EstadoTask;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { task: Task; isEdit: boolean },
     private dialogRef: MatDialogRef<TaskFormComponent>
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       id: [1],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      isCompleted: [false]
+      State: [this.statesTask.PENDIENTE],
     });
     this.fillForm();
   }
+
   fillForm() {
-    if(!this.data) return;
+    if (!this.data) return;
     this.isEdit.set(this.data.isEdit);
-    if (this.data?.task) {
-      this.taskForm.patchValue(this.data.task);
+    if (!this.data?.task) return;
+    if (this.data.task.state === this.statesTask.COMPLETADO) {
+      this.taskForm.get('State')!.setValue(this.statesTask.COMPLETADO);
+    }else{
+      this.taskForm.get('State')!.setValue(false);
     }
+
+    this.taskForm.patchValue(this.data.task);
+
+  }
+  onStateChange(checked: boolean): void {
+    const newState = checked ? this.statesTask.COMPLETADO : this.statesTask.PENDIENTE;
+    this.taskForm.get('State')!.setValue(newState);
   }
   save(): void {
-    if(this.taskForm.valid){
+    if (this.taskForm.valid) {
       this.taskForm.markAllAsTouched();
     }
 
@@ -56,7 +68,7 @@ export class TaskFormComponent implements OnInit{
         this.completedServiceTask(data);
       }
     }, (error) => {
-      if(error){
+      if (error) {
         this.snackbar.notification$.next(error.message);
       }
     });
@@ -69,4 +81,4 @@ export class TaskFormComponent implements OnInit{
   }
 
 
- }
+}

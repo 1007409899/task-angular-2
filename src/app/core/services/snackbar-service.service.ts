@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Injectable({
@@ -9,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SnackBarService {
   public notification$: Subject<string> = new Subject();
   public Mensaje$: Subject<string> = new Subject();
+  dialog = inject(MatDialog);
 
   constructor( private snackBar: MatSnackBar) {
     this.notification$.subscribe((message) => {
@@ -26,6 +29,18 @@ export class SnackBarService {
       });
     });
   }
+  confirmDialog(message: string): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: { message },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if(result){
+          observer.next(true);
+        }
+      });
+    });
 
+  }
 
 }

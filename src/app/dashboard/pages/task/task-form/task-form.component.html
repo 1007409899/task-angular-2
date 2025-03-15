@@ -1,4 +1,4 @@
-<h3 mat-dialog-title>Agregar</h3>
+<h3 mat-dialog-title>{{this.isEdit() ? 'Editar ': 'Guardar '}} Tarea</h3>
 
 <div class="container" mat-dialog-content>
   <form [formGroup]="taskForm">
@@ -13,14 +13,14 @@
         <mat-label>Descripción</mat-label>
         <input matInput placeholder="Descripción" formControlName="description" />
       </mat-form-field>
-      <mat-checkbox class="col-md-6 col-sm-12"  formControlName="isCompleted">Completada ?</mat-checkbox>
+      <mat-checkbox  [checked]="taskForm.get('State')!.value === statesTask.COMPLETADO" class="col-md-6 col-sm-12"   (change)="onStateChange($event.checked)">Completada ?</mat-checkbox>
   </div>
   </form>
 
 </div>
 <mat-dialog-actions class="d-flex justify-content-end m-2 " >
   <button mat-raised-button mat-dialog-close type="button" color="default">Cancelar</button>
-  <button [disabled]="this.taskForm.invalid" mat-raised-button type="button" color="primary" (click)="this.save()">Guardar</button>
+  <button [disabled]="this.taskForm.invalid" mat-raised-button type="button" color="primary" (click)="this.save()">{{this.isEdit() ? 'Actualizar': 'Guardar'}}</button>
 </mat-dialog-actions>
 
 
