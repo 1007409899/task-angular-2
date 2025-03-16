@@ -1,27 +1,35 @@
 # TaskFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+TaskFront 🚀
+Este proyecto fue generado con Angular CLI versión 16.2.16. Es la interfaz de usuario de una aplicación web que permite la gestión de tareas, implementando operaciones CRUD (Crear, Leer, Actualizar y Eliminar). Se utilizó Angular como framework principal por su robustez, modularidad y facilidad para crear aplicaciones escalables de una sola página (SPA).
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Descripción del Proyecto
+TaskFront es un frontend desarrollado en Angular que permite a los usuarios gestionar tareas de manera intuitiva. El usuario puede crear tareas, marcarlas como completadas, eliminarlas y aplicar filtros para su visualización.
 
-## Code scaffolding
+🛠️ Tecnologías y Herramientas Utilizadas
+Angular 16.2.16: Framework para construir aplicaciones SPA robustas y modulares.
+TypeScript: Lenguaje principal en Angular, que permite tipado estático y mejor mantenibilidad.
+Angular Material / Bootstrap: Frameworks CSS para aplicar estilos de manera rápida y consistente.
+RxJS: Librería de programación reactiva para gestionar el flujo de datos y eventos asíncronos.
+Angular CLI: Herramienta oficial para gestionar el ciclo de vida del proyecto Angular.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+# Justificación de Herramientas y Enfoques
+Angular fue elegido por su arquitectura basada en componentes, facilitando la organización del código y su mantenimiento.
+Servicios de Angular permiten desacoplar la lógica de negocio y gestionar la comunicación con el backend de manera eficiente.
+Reactive Forms se utilizaron para una mejor validación y control de los formularios.
+Angular Material o Bootstrap se aplicaron para garantizar un diseño simple, limpio y responsivo.
+La separación clara entre componentes, servicios y modelos asegura la escalabilidad del proyecto.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Clonar App
+git clone https://github.com/1007409899/task-angular.git
+cd task-front
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-npm install
+-ng serve -o
 
-## Running end-to-end tests
+la app estara disponible en: 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+http://localhost:4200/dashboard/task-list
