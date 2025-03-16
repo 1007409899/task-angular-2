@@ -29,14 +29,16 @@ export class TaskFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { task: Task; isEdit: boolean },
     private dialogRef: MatDialogRef<TaskFormComponent>
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       id: [1],
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', Validators.required, Validators.maxLength(200)],
-      State: [this.statesTask.PENDIENTE],
+      description: ['', [Validators.required, Validators.maxLength(200)]],
+      State: [this.statesTask.PENDIENTE,[]],
     });
     this.fillForm();
   }
