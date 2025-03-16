@@ -50,7 +50,7 @@ export class TaskFormComponent implements OnInit {
     if (this.data.task.state === this.statesTask.COMPLETADO) {
       this.taskForm.get('State')!.setValue(this.statesTask.COMPLETADO);
     }else{
-      this.taskForm.get('State')!.setValue(false);
+      this.taskForm.get('State')!.setValue(this.statesTask.PENDIENTE);
     }
 
     this.taskForm.patchValue(this.data.task);

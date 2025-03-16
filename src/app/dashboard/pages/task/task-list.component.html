@@ -78,6 +78,15 @@
               [showFirstLastButtons]="true"
               >
 </mat-paginator>
+<ng-container  *ngIf="dataSource.data.length === 0">
+  <div class="d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
+    <mat-icon color="warn" style="font-size: 48px;">assignment</mat-icon>
+    <p class="mt-3">No hay tareas disponibles.</p>
+    <button mat-stroked-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon> Crear nueva tarea
+    </button>
+  </div>
+</ng-container>
 </mat-card-content>
 
 </mat-card>

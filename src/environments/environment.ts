@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44303'
+  apiUrl: 'https://apptask-cndpevcvduema2df.canadacentral-01.azurewebsites.net'
 };

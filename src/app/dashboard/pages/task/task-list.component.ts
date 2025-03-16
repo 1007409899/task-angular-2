@@ -15,11 +15,12 @@ import { SnackBarService } from '@app/core/services/snackbar-service.service';
 import { filter, switchMap, tap } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatCardModule, MatDialogModule, MatSnackBarModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatCardModule, MatDialogModule, MatSnackBarModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule, NgIf],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
 })
@@ -81,11 +82,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
       data: { task: data, isEdit }
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.taskService.getTodos().subscribe((data) => {
-          if (data) {
-            this.dataSource.data = data;
-          }
-        });
+        this.onEstadoChange(this.filtroEstado());
       }
     });
   }
